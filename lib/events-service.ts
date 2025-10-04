@@ -110,16 +110,21 @@ export class EventsService {
   // Delete an event
   static async deleteEvent(eventId: string): Promise<boolean> {
     try {
+      console.log('EventsService.deleteEvent called with eventId:', eventId)
+      
       const { error } = await supabase
         .from('events')
         .delete()
         .eq('id', eventId)
+
+      console.log('Supabase delete result:', { error })
 
       if (error) {
         console.error('Error deleting event:', error)
         return false
       }
 
+      console.log('Event deleted successfully from database')
       return true
     } catch (err) {
       console.error('Error:', err)

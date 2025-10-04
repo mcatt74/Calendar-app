@@ -600,11 +600,17 @@ export default function Page() {
   }
 
   const handleDeleteEvent = async (eventId: string) => {
+    console.log('handleDeleteEvent called with eventId:', eventId)
     try {
       const success = await EventsService.deleteEvent(eventId)
+      console.log('Delete result:', success)
       if (success) {
+        console.log('Event deleted successfully, reloading events...')
         // Reload events from database to ensure consistency
         await loadEvents()
+        console.log('Events reloaded after deletion')
+      } else {
+        console.error('Failed to delete event - no success returned')
       }
     } catch (error) {
       console.error('Error deleting event:', error)

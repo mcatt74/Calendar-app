@@ -114,7 +114,10 @@ export function AddEventModal({ open, onOpenChange, selectedDate, onAddEvent }: 
               />
               <button
                 type="button"
-                onClick={() => document.getElementById('event-date')?.showPicker()}
+                onClick={() => {
+                  const input = document.getElementById('event-date') as HTMLInputElement | null;
+                  input?.showPicker();
+                }}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
               >
                 <CalendarIcon size={20} />
